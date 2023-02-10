@@ -15,18 +15,17 @@
     <div class="row">
         <table class="table table-primary" id="table1" >
             <tr>
-                <td>id </td>
-                <td>Name</td>
-                <td>courses</td>
+                <th>id </th>
+                <th>Name</th>
+                <th>courses</th>
+                <th colspan="2">Action</th> 
+                
             </tr>
             
         </table>
     </div>
 </div>
-
-    
     <script>
-        
 $.ajax({
     url: 'http://localhost:8000/v1/student/',
     type: 'GET',
@@ -34,14 +33,19 @@ $.ajax({
     success: function(data) {
         var row;
         for(var i=0; i<=data.length-1; i++){
-            $("#table1").append("<tr><td>"+data[i].id+"</td><td>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><tr>");
+            $("#table1").append("<tr><td>"+data[i].id+"</td><td>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><td>"+"<button class='btn btn-warning' onclick='editFunc()'"+">Edit</button></td><td><button class='btn btn-danger'>Delete</button></td></tr>");
            function myfunction(course){
             return course.name
           }
+          
         }
+     
     }
-});
 
+});
+function editFunc(){
+            window.alert('button is clicked')
+          }
     </script>
 </body>
 </html>
