@@ -34,14 +34,10 @@ $.ajax({
     success: function(data) {
         var row;
         for(var i=0; i<=data.length-1; i++){
-            $("#table1").append("<tr><td>"+data[i].id+"</td><td>"+ data[i].name +"<td class='course'></td><tr>");
-        //    forEach(course in data[i].courses){
-        //     console.log(course.name)
-        //    }
-        data[i].courses.map(myfunction);
+            $("#table1").append("<tr><td>"+data[i].id+"</td><td>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><tr>");
            function myfunction(course){
-            $(".course").append(course.name);
-           }
+            return course.name
+          }
         }
     }
 });
