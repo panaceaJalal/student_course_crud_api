@@ -20,8 +20,9 @@
                 </div>
                 <div class="modal-body">
                     <form action="">
-                        <input type="text" placeholder="id" class="form-control">
-                        <input type="text" placeholder="Student Name" class="form-control">
+                        <input type="text" placeholder="id" class="form-control" id="stdID">
+                        <input type="text" placeholder="Student Name" id="name" class="form-control">
+                        
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -45,7 +46,6 @@
         </table>
     </div>
 </div>
-
     <script>
 $.ajax({
     url: 'http://localhost:8000/v1/student/',
@@ -54,7 +54,7 @@ $.ajax({
     success: function(data) {
         var row;
         for(var i=0; i<=data.length-1; i++){
-            $("#table1").append("<tr><td>"+data[i].id+"</td><td>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><td>"+"<button class='btn btn-warning' data-toggle='modal' data-target='#editModal'"+">Edit</button></td><td><button class='btn btn-danger'>Delete</button></td></tr>");
+            $("#table1").append("<tr><td id=''>"+data[i].id+"</td><td id='stdName'>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><td>"+"<button class='btn btn-warning' data-toggle='modal' data-target='#editModal'"+ " id='editBtn'>Edit</button></td><td><button class='btn btn-danger'>Delete</button></td></tr>");
            function myfunction(course){
             return course.name
           } 
@@ -64,6 +64,18 @@ $.ajax({
 function editFunc(){
             window.alert('button is clicked')
           }
+        
+function loadData(){
+    var stdNme=document.getElementById("stdName")
+    console.log(stdNme.innerText)
+    document.getElementById('name').value=stdNme.innerText
+}
+$('#editModal').on('show.bs.modal', e => {
+  var $button = $(e.relatedTarget);
+  $('#name').val($button.closest('td').prev().prev().text().trim());
+  $('#stdID').val($button.closest('td').prev().prev().prev().text().trim())
+});
+
     </script>
 
 
