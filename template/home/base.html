@@ -22,7 +22,11 @@
                     <form action="" id="editForm">
                         <input type="text" placeholder="id" class="form-control" id="stdID" style="margin-bottom: 20px;" disabled>
                         <input type="text" placeholder="Student Name" id="name" class="form-control" class="m-3" style="margin-bottom: 20px;">
+                        <input type="text" id="selectedCourses" >
                         <div id="courses">
+
+                        </div>
+                        <div id="selectedCourses">
 
                         </div>
                     </form>
@@ -56,7 +60,7 @@ $.ajax({
     success: function(data) {
         var row;
         for(var i=0; i<=data.length-1; i++){
-            $("#table1").append("<tr><td id='' class='m-3'>"+data[i].id+"</td><td id='stdName' class='m-3'>"+ data[i].name +"</td><td>"+data[i].courses.map(myfunction)+"</td><td>"+"<button class='btn btn-warning' data-toggle='modal' data-target='#editModal'"+ " id='editBtn'>Edit</button></td><td><button class='btn btn-danger'>Delete</button></td></tr>");
+            $("#table1").append("<tr><td id='' class='m-3'>"+data[i].id+"</td><td id='stdName' class='m-3'>"+ data[i].name +"</td><td id='courses'>"+data[i].courses.map(myfunction)+"</td><td>"+"<button class='btn btn-warning' data-toggle='modal' onclick='editFunc()' data-target='#editModal'"+ " id='editBtn'>Edit</button></td><td><button class='btn btn-danger'>Delete</button></td></tr>");
            function myfunction(course){
             return course.name
           } 
@@ -80,8 +84,13 @@ $.ajax({
     }
 });
 function editFunc(){
-            window.alert('button is clicked')
-          }
+  
+   var courses= $('#courses').val($button.closest('td').prev().text().trim());
+   var course=''
+   course= $('#courses').val()
+console.log(course)
+
+        }
         
 function loadData(){
     var stdNme=document.getElementById("stdName")
@@ -93,6 +102,8 @@ $('#editModal').on('show.bs.modal', e => {
   var $button = $(e.relatedTarget);
   $('#name').val($button.closest('td').prev().prev().text().trim());
   $('#stdID').val($button.closest('td').prev().prev().prev().text().trim())
+  $('#selectedCourses').val($button.closest('td').prev().text().trim())
+
 });
 
     </script>
