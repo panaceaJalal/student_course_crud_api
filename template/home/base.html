@@ -22,7 +22,9 @@
                     <form action="" id="editForm">
                         <input type="text" placeholder="id" class="form-control" id="stdID" style="margin-bottom: 20px;" disabled>
                         <input type="text" placeholder="Student Name" id="name" class="form-control" class="m-3" style="margin-bottom: 20px;">
-                        
+                        <div id="courses">
+
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -65,16 +67,18 @@ $.ajax({
     url:'http://localhost:8000/v1/course/',
     type:'GET',
     dataType:'json',
-    success:function(courses){
-        for(var i=0; i<=courses.length-1; i++){
-            console.log(courses[i].id)
-            $("#editModal").on('shown.bs.modal',e=>{
-                $("#editModal").find(".modal-body").append("<input type='checkbox'  name='vehicle1' value='" + courses[i].id + "'> <label for='vehicle1'> " + courses[i].name + "</label><br>");
-            })
-            // $("#editModal").append("<input type='checkbox' id='vehicle1' name='vehicle1' value='"+data[i].id+"'> <label for='vehicle1'> "+data[i].name+"</label><br>")
+    success:function(data){
+        var option='';
+        for(var i=0; i<=data.length-1; i++){
+            console.log(data[i].name)
+            // $("#editModal").on('shown.bs.modal',e=>{
+            //     $("#editModal").find("#course").append("<input type='checkbox'  name='vehicle1' value='" + data[i].id +">");
+            // })
+           option+= "<input type='checkbox'  name='vehicle1' value='"+data[i].id+"'>  "+data[i].name+"<br>"
         }
+        $("#courses").html(option);
     }
-})
+});
 function editFunc(){
             window.alert('button is clicked')
           }
