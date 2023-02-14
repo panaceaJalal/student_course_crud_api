@@ -22,7 +22,7 @@
                     <form action="" id="editForm">
                         <input type="text" placeholder="id" class="form-control" id="stdID" style="margin-bottom: 20px;" disabled>
                         <input type="text" placeholder="Student Name" id="name" class="form-control" class="m-3" style="margin-bottom: 20px;">
-                        <input type="text" id="selectedCourses" >
+                        
                         <div id="courses">
 
                         </div>
@@ -84,11 +84,12 @@ $.ajax({
     }
 });
 function editFunc(){
+    var currentRow=$('#editBtn').closest("td"); 
+    var data = $("td:eq(2)").text();
+
+   var courses= currentRow.find("td:eq(1)").text();
   
-   var courses= $('#courses').val($button.closest('td').prev().text().trim());
-   var course=''
-   course= $('#courses').val()
-console.log(course)
+console.log(data)
 
         }
         
